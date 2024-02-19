@@ -7,7 +7,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{22
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patients", "Patients", "{42E36C52-54A8-4CD0-A9D6-4F5A7755E6CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCSYS.PatientsService.Api", "Services\Patients\HCSYS.PatientsService.Api\HCSYS.PatientsService.Api.csproj", "{34948E22-F19F-4E89-B60D-7D12BB650B2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCSYS.PatientsService.Api", "Services\Patients\HCSYS.PatientsService.Api\HCSYS.PatientsService.Api.csproj", "{34948E22-F19F-4E89-B60D-7D12BB650B2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1274DDE4-2871-478B-9349-7B59C37D594D}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.env.template = .env.template
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		docker-compose.override.yml = docker-compose.override.yml
+		docker-compose.yml = docker-compose.yml
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
