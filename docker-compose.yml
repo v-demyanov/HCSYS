@@ -2,11 +2,21 @@ version: '3.4'
 
 name: hcsys
 services:
+  db:
+    image: postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+
   api:
     image: ${API_IMAGE_PATH}:${API_TAG}
     build:
       context: .
       dockerfile: Services/Patients/HCSYS.PatientsService.Api/Dockerfile
+
+volumes:
+  postgres_data:
+  pgadmin_data:
 
 networks:
   default:
