@@ -1,4 +1,4 @@
-﻿using HCSYS.PatientsService.Persistence.Entities;
+﻿using HCSYS.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

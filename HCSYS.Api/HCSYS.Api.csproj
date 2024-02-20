@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCSYS.PatientsService.Persistence\HCSYS.PatientsService.Persistence.csproj" />
+    <ProjectReference Include="..\HCSYS.Persistence\HCSYS.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

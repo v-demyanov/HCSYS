@@ -12,7 +12,7 @@ services:
     image: ${API_IMAGE_PATH}:${API_TAG}
     build:
       context: .
-      dockerfile: Services/Patients/HCSYS.PatientsService.Api/Dockerfile
+      dockerfile: HCSYS.Api/Dockerfile
 
 volumes:
   postgres_data:

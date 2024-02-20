@@ -1,6 +1,6 @@
-﻿using HCSYS.PatientsService.Persistence.Enums;
+﻿using HCSYS.Persistence.Enums;
 
-namespace HCSYS.PatientsService.Persistence.Entities;
+namespace HCSYS.Persistence.Entities;
 
 public class Patient : BaseEntity
 {

@@ -1,4 +1,4 @@
-﻿namespace HCSYS.PatientsService.Persistence.Enums;
+﻿namespace HCSYS.Persistence.Enums;
 
 public enum Gender : byte
 {

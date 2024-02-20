@@ -1,4 +1,4 @@
-﻿namespace HCSYS.PatientsService.Persistence.Entities;
+﻿namespace HCSYS.Persistence.Entities;
 
 public class PatientName : BaseEntity
 {

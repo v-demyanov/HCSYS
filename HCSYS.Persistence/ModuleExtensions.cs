@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HCSYS.PatientsService.Persistence;
+namespace HCSYS.Persistence;
 
 public static class ModuleExtensions
 {

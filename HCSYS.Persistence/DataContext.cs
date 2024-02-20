@@ -1,7 +1,7 @@
-﻿using HCSYS.PatientsService.Persistence.Entities;
+﻿using HCSYS.Persistence.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HCSYS.PatientsService.Persistence;
+namespace HCSYS.Persistence;
 
 public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {

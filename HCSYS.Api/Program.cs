@@ -1,4 +1,4 @@
-using HCSYS.PatientsService.Persistence;
+using HCSYS.Persistence;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
