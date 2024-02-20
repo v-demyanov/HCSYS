@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Ignore environment files
 .env
+launchSettings.json

@@ -22,6 +22,8 @@ services:
 
   api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=${API_ENVIRONMENT}
+      - ConnectionStrings__Default=${DEFAULT_CONNECTION_STRING} 
     ports:
       - ${API_EXTERNAL_PORT:-8000}:8080
+    depends_on: 
+      - db
