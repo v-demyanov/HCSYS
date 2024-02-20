@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HCSYS.PatientsService.Persistence.Configurations;
+namespace HCSYS.Persistence.Configurations;
 
 public class PatientNameConfiguration : IEntityTypeConfiguration<PatientName>
 {

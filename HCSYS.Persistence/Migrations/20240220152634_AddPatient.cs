@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HCSYS.PatientsService.Persistence.Migrations
+namespace HCSYS.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class AddPatient : Migration

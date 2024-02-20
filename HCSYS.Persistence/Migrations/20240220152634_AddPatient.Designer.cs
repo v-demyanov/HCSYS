@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace HCSYS.PatientsService.Persistence.Migrations
+namespace HCSYS.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20240220152634_AddPatient")]
