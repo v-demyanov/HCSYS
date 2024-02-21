@@ -8,6 +8,8 @@ public interface IPatientsService
 
     Task<PatientDto> GetByIdAsync(Guid patientId);
 
+    Task<IQueryable<PatientDto>> SearchAsync(SearchPatientsRequest request);
+
     Task UpdateAsync(UpdatePatientRequest request);
 
     Task DeleteAsync(Guid patientId);
