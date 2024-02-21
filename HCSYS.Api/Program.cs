@@ -1,3 +1,6 @@
+using HCSYS.Api.Middlewares;
+
+using HCSYS.Core;
 using HCSYS.Persistence;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -11,8 +14,8 @@ builder.Services.AddPersistence(configuration.GetConnectionString("Default"));
 
 WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
