@@ -1,6 +1,5 @@
 ﻿using HCSYS.Api.Models;
 using HCSYS.Core.Exceptions;
-using System.ComponentModel.DataAnnotations;
 
 namespace HCSYS.Api.Middlewares;
 
@@ -24,11 +23,19 @@ public class ExceptionHandlingMiddleware
             context.Response.StatusCode = exception switch
             {
                 EntityNotFoundException => StatusCodes.Status404NotFound,
-                ValidationException => StatusCodes.Status422UnprocessableEntity,
+                UnprocessableEntityException => StatusCodes.Status422UnprocessableEntity,
                 _ => StatusCodes.Status500InternalServerError,
             };
 
-            await this.HandleByDefaultAsync(context, exception);
+            switch (exception)
+            {
+                case UnprocessableEntityException unprocessableEntityException:
+                    await HandleUnprocessableEntityExceptionAsync(context, unprocessableEntityException);
+                    break;
+                default:
+                    await HandleByDefaultAsync(context, exception);
+                    break;
+            }
         }
     }
 
@@ -38,6 +45,16 @@ public class ExceptionHandlingMiddleware
         {
             StatusCode = context.Response.StatusCode,
             Title = exception.Message,
+        });
+    }
+
+    private async Task HandleUnprocessableEntityExceptionAsync(HttpContext context, UnprocessableEntityException exception)
+    {
+        await context.Response.WriteAsJsonAsync(new ErrorResponse
+        {
+            StatusCode = context.Response.StatusCode,
+            Title = exception.Message,
+            Errors = exception.Errors,
         });
     }
 }
