@@ -6,6 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["HCSYS.Api/HCSYS.Api.csproj", "HCSYS.Api/"]
+COPY ["HCSYS.Core/HCSYS.Core.csproj", "HCSYS.Core/"]
 COPY ["HCSYS.Persistence/HCSYS.Persistence.csproj", "HCSYS.Persistence/"]
 RUN dotnet restore "./HCSYS.Api/HCSYS.Api.csproj"
 COPY . .

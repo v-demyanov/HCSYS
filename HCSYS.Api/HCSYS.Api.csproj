@@ -25,7 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCSYS.Persistence\HCSYS.Persistence.csproj" />
+    <ProjectReference Include="..\HCSYS.Core\HCSYS.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

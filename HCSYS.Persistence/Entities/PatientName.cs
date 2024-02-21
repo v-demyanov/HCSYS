@@ -10,5 +10,5 @@ public class PatientName : BaseEntity
 
     public Guid PatientId { get; set; }
 
-    required public Patient Patient { get; set; }
+    public Patient? Patient { get; set; }
 }
