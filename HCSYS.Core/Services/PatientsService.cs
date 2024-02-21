@@ -38,15 +38,19 @@ public class PatientsService : IPatientsService
 
     public Task<PatientDto> GetByIdAsync(Guid patientId)
     {
-        Patient? patient = _dataContext.Patients
+        PatientDto? patient = _dataContext.Patients
+            .AsNoTracking()
             .Include(x => x.Name)
+            .ProjectTo<PatientDto>(_mapper.ConfigurationProvider)
             .FirstOrDefault(x => x.Id == patientId);
+
         if (patient is null)
         {
             throw new EntityNotFoundException(nameof(patient), patientId);
         }
 
-        PatientDto patientDto = _mapper.Map<PatientDto>(patient);
+        return Task.FromResult(patient);
+    }
 
     public Task<IQueryable<PatientDto>> SearchAsync(SearchPatientsRequest request)
     {
@@ -55,7 +59,7 @@ public class PatientsService : IPatientsService
         try
         {
             birthDateFilters = ParseBirthDateFilters(request.BirthDateFilters);
-    }
+        }
         catch (Exception exception) 
         when (exception is InvalidOperationException || exception is ArgumentOutOfRangeException)
         {
