@@ -81,4 +81,24 @@ public class PatientsController : ControllerBase
 
         return StatusCode(StatusCodes.Status204NoContent);
     }
+
+    /// <summary>
+    /// Searches patients.
+    /// </summary>
+    /// <param name="request">Data to search for patients.</param>
+    /// <returns>Data transfer objects of searched patient entities or expected errors.</returns>
+    [HttpPost("search")]
+    [ProducesResponseType(typeof(IEnumerable<PatientDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<IEnumerable<PatientDto>>> Search([FromBody] SearchPatientsRequest request)
+    {
+        IEnumerable<PatientDto> patients = await _patientsService.SearchAsync(request);
+
+        if (patients.Count() is 0)
+        {
+            return StatusCode(StatusCodes.Status204NoContent);
+        }
+
+        return StatusCode(StatusCodes.Status200OK, patients);
+    }
 }
