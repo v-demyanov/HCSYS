@@ -2,6 +2,8 @@
 
 HCSYS – Health Care System.
 
+You can find postman collection [here](./HCSYS.postman_collection.json).
+
 ## Getting Started
 This is the short guide on how to deploy the application locally using docker.
 
