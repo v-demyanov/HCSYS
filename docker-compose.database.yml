@@ -1,16 +1,21 @@
 version: '3.4'
 
+name: hcsys
 services:
   db:
+    image: postgres
     environment:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     restart: always
+    ports:
+      - ${DB_EXTERNAL_PORT:-5432}:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
   pgadmin:
+    image: dpage/pgadmin4
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
@@ -20,10 +25,10 @@ services:
     volumes:
       - pgadmin_data:/root/.pgadmin
 
-  api:
-    environment:
-      - ConnectionStrings__Default=${DEFAULT_CONNECTION_STRING} 
-    ports:
-      - ${API_EXTERNAL_PORT:-8000}:8080
-    depends_on: 
-      - db
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  default:
+    name: hcsys
