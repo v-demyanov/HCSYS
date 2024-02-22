@@ -36,7 +36,7 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Channels API"));
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Patients API"));
 
 if (!app.Environment.IsDevelopment())
 {
