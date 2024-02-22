@@ -4,5 +4,5 @@ namespace HCSYS.ConsoleClient;
 
 public interface IPatientsControllerClient
 {
-    Task CreateAsync(CreatePatientRequest request);
+    Task<HttpResponseMessage> CreateAsync(CreatePatientRequest request);
 }

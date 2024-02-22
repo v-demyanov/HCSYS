@@ -10,7 +10,7 @@ public class PatientsControllerClient : IPatientsControllerClient
         this.HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
     }
 
-    public async Task CreateAsync(CreatePatientRequest request) =>
+    public async Task<HttpResponseMessage> CreateAsync(CreatePatientRequest request) =>
         await HttpClient.PostAsJsonAsync(BaseRoute, request);
 
     protected HttpClient HttpClient { get; }

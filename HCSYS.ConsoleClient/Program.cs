@@ -1,9 +1,13 @@
 ﻿using HCSYS.ConsoleClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Core;
+using Serilog.Sinks.SystemConsole.Themes;
 
 IConfigurationRoot configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", true)
+    .AddJsonFile("appsettings.Development.json", true)
     .AddEnvironmentVariables()
     .Build();
 
@@ -20,10 +24,24 @@ serviceCollection.AddHttpClient<IPatientsControllerClient, PatientsControllerCli
 });
 
 ServiceProvider serviceProvider = serviceCollection
+    .AddLogging(builder =>
+    {
+        Logger logger = ConfigureLogging();
+        builder.AddSerilog(logger);
+    })
     .Configure<GeneratorConfig>(configuration.GetRequiredSection(nameof(GeneratorConfig)))
     .AddSingleton<PatientsGenerator>()
     .BuildServiceProvider();
 
-await serviceProvider
-    .GetRequiredService<PatientsGenerator>()
+await serviceProvider.GetRequiredService<PatientsGenerator>()
     .RunAsync();
+
+static Logger ConfigureLogging()
+{
+    const string template =
+        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}";
+
+    return new LoggerConfiguration()
+        .WriteTo.Console(outputTemplate: template, theme: AnsiConsoleTheme.Code)
+        .CreateLogger();
+}
