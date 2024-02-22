@@ -1,0 +1,15 @@
+version: '3.4'
+
+name: hcsys
+services:
+  consoleclient:
+    image: ${CLIENT_IMAGE_PATH}:${CLIENT_TAG}
+    build:
+      context: .
+      dockerfile: HCSYS.ConsoleClient/Dockerfile
+    environment:
+      - BaseApiUri=http://api:8080
+
+networks:
+  default:
+    name: hcsys

@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		docker-compose.api.yml = docker-compose.api.yml
+		docker-compose.client.yml = docker-compose.client.yml
 		docker-compose.database.yml = docker-compose.database.yml
 		Makefile = Makefile
 		README.md = README.md
@@ -21,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCSYS.Persistence", "HCSYS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCSYS.Core", "HCSYS.Core\HCSYS.Core.csproj", "{E490F4DC-B32A-4ACE-8136-05337EF2D896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCSYS.ConsoleClient", "HCSYS.ConsoleClient\HCSYS.ConsoleClient.csproj", "{F14DC861-8A3B-435B-A1B7-E6959B8263A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HCSYS.ConsoleClient", "HCSYS.ConsoleClient\HCSYS.ConsoleClient.csproj", "{F14DC861-8A3B-435B-A1B7-E6959B8263A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
