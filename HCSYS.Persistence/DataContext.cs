@@ -1,4 +1,5 @@
 ﻿using HCSYS.Persistence.Entities;
+using HCSYS.Persistence.ValueConverters;
 using Microsoft.EntityFrameworkCore;
 
 namespace HCSYS.Persistence;
@@ -13,5 +14,12 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<DateTimeOffset>()
+            .HaveConversion<DateTimeOffsetConverter>();
     }
 }
