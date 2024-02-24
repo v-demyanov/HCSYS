@@ -22,37 +22,35 @@ public class PatientsService : IPatientsService
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public Task<PatientDto> CreateAsync(CreatePatientRequest request)
+    public async Task<PatientDto> CreateAsync(CreatePatientRequest request)
     {
         // TODO: Validate request
 
         Patient patientToAdd = _mapper.Map<Patient>(request);
 
         _dataContext.Patients.Add(patientToAdd);
-        _dataContext.SaveChanges();
+        await _dataContext.SaveChangesAsync();
 
-        PatientDto patientDto = _mapper.Map<PatientDto>(patientToAdd);
-
-        return Task.FromResult(patientDto);
+        return _mapper.Map<PatientDto>(patientToAdd);
     }
 
-    public Task<PatientDto> GetByIdAsync(Guid patientId)
+    public async Task<PatientDto> GetByIdAsync(Guid patientId)
     {
-        PatientDto? patient = _dataContext.Patients
+        PatientDto? patient = await _dataContext.Patients
             .AsNoTracking()
             .Include(x => x.Name)
             .ProjectTo<PatientDto>(_mapper.ConfigurationProvider)
-            .FirstOrDefault(x => x.Id == patientId);
+            .FirstOrDefaultAsync(x => x.Id == patientId);
 
         if (patient is null)
         {
             throw new EntityNotFoundException(nameof(patient), patientId);
         }
 
-        return Task.FromResult(patient);
+        return patient;
     }
 
-    public Task<IQueryable<PatientDto>> SearchAsync(SearchPatientsRequest request)
+    public async Task<IEnumerable<PatientDto>> SearchAsync(SearchPatientsRequest request)
     {
         var birthDateFilters = new Dictionary<string, HashSet<string>>();
 
@@ -67,35 +65,34 @@ public class PatientsService : IPatientsService
         }
 
         string filterQuery = CreateBirthDateFilterQuery(birthDateFilters);
-        IQueryable<PatientDto> patients = _dataContext.Patients
+        IEnumerable<PatientDto> patients = await _dataContext.Patients
             .AsNoTracking()
             .Where(filterQuery, birthDateFilters.Keys.ToArray())
-            .ProjectTo<PatientDto>(_mapper.ConfigurationProvider);
+            .ProjectTo<PatientDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
 
-        return Task.FromResult(patients);
+        return patients;
     }
 
-    public Task DeleteAsync(Guid patientId)
+    public async Task DeleteAsync(Guid patientId)
     {
-        Patient? patientToDelete = _dataContext.Patients.FirstOrDefault(x => x.Id == patientId);
+        Patient? patientToDelete = await _dataContext.Patients.FirstOrDefaultAsync(x => x.Id == patientId);
         if (patientToDelete is null)
         {
             throw new EntityNotFoundException(nameof(patientToDelete), patientId);
         }
 
         _dataContext.Patients.Remove(patientToDelete);
-        _dataContext.SaveChanges();
-
-        return Task.CompletedTask;
+        await _dataContext.SaveChangesAsync();
     }
 
-    public Task UpdateAsync(UpdatePatientRequest request)
+    public async Task UpdateAsync(UpdatePatientRequest request)
     {
         // TODO: Validate request
 
-        Patient? patientToUpdate = _dataContext.Patients
+        Patient? patientToUpdate = await _dataContext.Patients
             .Include(x => x.Name)
-            .FirstOrDefault(x => x.Id == request.PatientToUpdateId);
+            .FirstOrDefaultAsync(x => x.Id == request.PatientToUpdateId);
         if (patientToUpdate is null)
         {
             throw new EntityNotFoundException(nameof(patientToUpdate), request.PatientToUpdateId);
@@ -104,9 +101,7 @@ public class PatientsService : IPatientsService
         _mapper.Map(request, patientToUpdate);
 
         _dataContext.Patients.Update(patientToUpdate);
-        _dataContext.SaveChanges();
-
-        return Task.CompletedTask;
+        await _dataContext.SaveChangesAsync();
     }
 
     private static Dictionary<string, HashSet<string>> ParseBirthDateFilters(IEnumerable<string> birthDateFilters)
